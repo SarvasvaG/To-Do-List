@@ -19,68 +19,46 @@ function checkNonEmpty(task) {
     return false;
 }
 
-app.get("/", (req, res) => {
-    taskPArr=[];
-    taskWArr=[];
-    
-    console.log(req.body+"1");
-    res.render("index.ejs");
-});
-
-app.get("/work", (req, res) => {
-    console.log(req.body+"2");
-    res.render("work.ejs");
-});
-
-app.get("/personal", (req, res) => {
-    console.log(req.body+"3");
-    res.render("personal.ejs");
-});
-
-app.post("/", (req, res) => {
-    console.log(req.body+"4");
-    res.render("index.ejs");
-});
-
-app.post("/personal", (req, res) => {
-    console.log(req.body+"5");
+function createTask(req,arr)
+{
     const task = req.body.task;
     const del_ = req.body.delete;
 
     if (del_ !== undefined)
-        taskPArr = [];
+        arr = [];
 
     else if (task !== undefined && checkNonEmpty(task))
-        taskPArr.push(task);
+        arr.push(task);
+}
 
+app.get("/", (req, res) => {
+    taskPArr=[];
+    taskWArr=[];
+
+    res.render("index.ejs");
+});
+
+app.post("/", (req, res) => {
+    res.render("index.ejs");
+});
+
+app.post("/personal", (req, res) => {
+    createTask(req,taskPArr);
     res.redirect('/success-p');
 });
 
 
 app.get('/success-p', (req, res) => {
-    console.log(req.body+"6");
     res.render("personal.ejs", { task: taskPArr, });
 });
 
 
 app.post("/work", (req, res) => {
-    console.log(req.body+"7");
-    const task = req.body.task;
-    const del_ = req.body.delete;
-    console.log(req.body);
-
-    if (del_ !== undefined)
-        taskWArr = [];
-
-    else if (task !== undefined && checkNonEmpty(task))
-        taskWArr.push(task);
-    console.log(task);
-
+    createTask(req,taskWArr);
     res.redirect('/success-w');
 });
 
 app.get('/success-w', (req, res) => {
-    console.log(req.body+"8");
     res.render("work.ejs", { task: taskWArr, });
 });
 
