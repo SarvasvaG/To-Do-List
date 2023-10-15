@@ -17,22 +17,11 @@ function checkNonEmpty(task) {
     if (task.length === 0)
         return false;
 
-    for (i = 0; i < task.length; i++)
+    for (var i = 0; i < task.length; i++)
         if (task[i] != ' ')
             return true;
 
     return false;
-}
-
-function createTask(req, arr) {
-    const task = req.body.task;
-    const del_ = req.body.delete;
-
-    if (del_ !== undefined)
-        arr = [];
-
-    else if (task !== undefined && checkNonEmpty(task))
-        arr.push(task);
 }
 
 app.get("/", (req, res) => {
@@ -47,7 +36,14 @@ app.post("/", (req, res) => {
 });
 
 app.post("/personal", (req, res) => {
-    createTask(req, req.session.taskPArr);
+    const task = req.body.task;
+    const del_ = req.body.delete;
+
+    if (del_ !== undefined)
+        req.session.taskPArr = [];
+    else if (task !== undefined && checkNonEmpty(task))
+        req.session.taskPArr.push(task);
+
     res.redirect('/success-p');
 });
 
@@ -58,7 +54,14 @@ app.get('/success-p', (req, res) => {
 
 
 app.post("/work", (req, res) => {
-    createTask(req, req.session.taskWArr);
+    const task = req.body.task;
+    const del_ = req.body.delete;
+
+    if (del_ !== undefined)
+        req.session.taskWArr = [];
+    else if (task !== undefined && checkNonEmpty(task))
+        req.session.taskWArr.push(task);
+
     res.redirect('/success-w');
 });
 
