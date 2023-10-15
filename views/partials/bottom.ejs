@@ -1,0 +1,25 @@
+<div class="currentTasks">
+    <% if(locals.task){ %>
+        <% for(i=0;i<task.length;i++) { %>
+            <div class="task" id=<%=`task-${i}`%>>
+                <label for=<%=`check-${i}`%>><%= task[i] %></label>
+                <input type="checkbox" name="checked" id=<%=`check-${i}`%>>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+</div>
+</body>
+
+<script>
+var checkBoxes = document.querySelectorAll(`input[type="checkbox"]`);
+
+checkBoxes.forEach((box) => {
+box.addEventListener("change", () => {
+    var id = box.id;
+    var label = document.querySelector(`label[for="${id}"]`);
+    label.classList.toggle("strike");
+});
+});
+</script>
+</html>
