@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@300&display=swap');
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif; */
+
+.container:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    background: url('../images/work_bg.jpeg') no-repeat center center;
+    background-size: 100%;
+    z-index: -1;
+
+    filter: blur(5px);
+}
+
+.back {
+    margin: 20px;
+}
+
+.back img {
+    width: 40px;
+}
+
+.head {
+    text-align: center;
+
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Montserrat', sans-serif;
+
+    margin: 20px;
+    color: #FFFFFF;
+}
+
+.addTask,
+.currentTasks .task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    width: 600px;
+    height: 50px;
+
+    background-color: #FFFFFF;
+    margin: 0px auto 0px auto;
+}
+
+.currentTasks {
+    width: 600px;
+
+    background-color: white;
+
+    margin: 0px auto;
+}
+
+.addTask {
+    margin: 20px auto 0px auto;
+    border-bottom: 1px solid #000000;
+
+    border-radius: 5px 5px 0px 0px;
+}
+
+.addTask input,
+.currentTasks .task input,
+label {
+    height: 40px;
+
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
+
+    border: none;
+    outline: none;
+    padding: 0px;
+    margin: 5px 0px;
+}
+
+.addTask input[type="text"]{
+    width: 460px;
+}
+.currentTasks .task label {
+    width: 500px;
+}
+.addTask input[type="submit"] {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background-color: #B6515A;
+    color: #FFFFFF;
+}
+
+.strike {
+    text-decoration: line-through;
+    color: #999;
+}
+
+@media (max-width: 600px) {
+    .back img {
+        width: 20px;
+    }
+
+    .head {
+        text-align: center;
+
+        font-size: 40px;
+    }
+
+    .addTask,
+    .currentTasks .task {
+        width: 300px;
+        height: 40px;
+
+        background-color: #FFFFFF;
+        margin: 0px auto 0px auto;
+    }
+
+    .currentTasks {
+        width: 300px;
+    }
+
+    .addTask {
+        margin: 10px auto 0px auto;
+        border-bottom: 1px solid #000000;
+
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    .addTask input,
+    .currentTasks .task input,
+    label {
+        font-size: 15px;
+        height: 30px;
+
+        margin: 5px 0px;
+    }
+
+    .addTask input[type="text"],
+    .currentTasks .task label {
+        width: 250px;
+    }
+
+    .addTask input[type="text"]
+    {
+        width: 200px;
+    }
+    .addTask input[type="submit"] {
+        width: 30px;
+        height: 30px;
+    }
+}
