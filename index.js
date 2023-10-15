@@ -20,7 +20,7 @@ function checkNonEmpty(task){
 }
 
 app.get("/", (req, res) => {
-    res.render("home.ejs");
+    res.render("index.ejs");
 });
 
 app.get("/work", (req, res) => {
@@ -32,7 +32,7 @@ app.get("/personal", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    res.render("home.ejs");
+    res.render("index.ejs");
 });
 
 app.post("/personal", (req, res) => {
@@ -61,7 +61,7 @@ app.post("/work", (req, res) => {
     console.log(req.body);
 
     if(del_!==undefined)
-    taskPArr=[];
+    taskWArr=[];
 
     else if (task !== undefined&& checkNonEmpty(task))
         taskWArr.push(task);
