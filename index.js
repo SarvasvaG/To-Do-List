@@ -1,12 +1,17 @@
 import express from "express";
 import bodyParser from "body-parser";
+import session from "express-session";
+
 const app = express();
 const port = 3000;
-var taskWArr = [];
-var taskPArr = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 function checkNonEmpty(task) {
     if (task.length === 0)
@@ -19,8 +24,7 @@ function checkNonEmpty(task) {
     return false;
 }
 
-function createTask(req,arr)
-{
+function createTask(req, arr) {
     const task = req.body.task;
     const del_ = req.body.delete;
 
@@ -32,8 +36,8 @@ function createTask(req,arr)
 }
 
 app.get("/", (req, res) => {
-    taskPArr=[];
-    taskWArr=[];
+    req.session.taskPArr = [];
+    req.session.taskWArr = [];
 
     res.render("index.ejs");
 });
@@ -43,25 +47,25 @@ app.post("/", (req, res) => {
 });
 
 app.post("/personal", (req, res) => {
-    createTask(req,taskPArr);
+    createTask(req, req.session.taskPArr);
     res.redirect('/success-p');
 });
 
 
 app.get('/success-p', (req, res) => {
-    res.render("personal.ejs", { task: taskPArr, });
+    res.render("personal.ejs", { task: req.session.taskPArr, });
 });
 
 
 app.post("/work", (req, res) => {
-    createTask(req,taskWArr);
+    createTask(req, req.session.taskWArr);
     res.redirect('/success-w');
 });
 
 app.get('/success-w', (req, res) => {
-    res.render("work.ejs", { task: taskWArr, });
+    res.render("work.ejs", { task: req.session.taskWArr, });
 });
 
 app.listen(port, () => {
     console.log("Listening on the port 3000.");
-})
+});
